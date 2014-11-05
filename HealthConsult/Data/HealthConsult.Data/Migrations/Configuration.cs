@@ -17,7 +17,7 @@ namespace HealthConsult.Data.Migrations
     internal sealed class Configuration : DbMigrationsConfiguration<HealthConsult.Data.ApplicationDbContext>
     {
         private const string AdminRole = "Admin";
-        private const string AdminEmail = "admin@healthconsult.com";
+        private const string AdminUserName = "Admin";
         private const string SpecialistRole = "Specialist";
         private const string InitialPassword = "123456";
 
@@ -73,7 +73,7 @@ namespace HealthConsult.Data.Migrations
 
             var store = new UserStore<User>(context);
             var manager = new UserManager<User>(store);
-            var user = new User { UserName = AdminEmail };
+            var user = new User { UserName = AdminUserName };
 
             manager.Create(user, InitialPassword);
             manager.AddToRole(user.Id, AdminRole);
