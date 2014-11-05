@@ -8,7 +8,6 @@
         public Speciality()
         {
             this.Specialists = new HashSet<Specialist>(); 
-            this.Consultations = new HashSet<Consultation>(); 
         }
 
         public int Id { get; set; }
@@ -17,7 +16,5 @@
         public string Name { get; set; }
 
         public virtual ICollection<Specialist> Specialists { get; set; }
-
-        public virtual ICollection<Consultation> Consultations { get; set; }
     }
 }

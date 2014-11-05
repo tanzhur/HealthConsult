@@ -14,6 +14,9 @@
 
         public string Phone { get; set; }
 
+        [Required]
+        public int SpecialityId { get; set; }
+
         public Speciality Speciality { get; set; }
 
         [Required]

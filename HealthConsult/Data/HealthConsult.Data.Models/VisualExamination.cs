@@ -25,5 +25,8 @@
 
         [Required]
         public byte[] FileContent { get; set; }
+
+        [Required]
+        public string FileType { get; set; }
     }
 }
