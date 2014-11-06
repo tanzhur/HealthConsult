@@ -14,7 +14,12 @@
             return this.View();
         }
 
-        public ActionResult Hospital()
+        public ActionResult Hospitals()
+        {
+            return this.View();
+        }
+
+        public ActionResult Specialties()
         {
             return this.View();
         }

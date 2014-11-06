@@ -7,12 +7,12 @@
     using HealthConsult.Web.Infrastructure.Mapping;
     using AutoMapper;
 
-    public class HospitalViewModel: IMapFrom<Hospital>
+    public class SpecialtyViewModel : IMapFrom<Speciality>
     {
-        public HospitalViewModel()
+        public SpecialtyViewModel()
         {
-            Mapper.CreateMap<HospitalViewModel, Hospital>();
-            Mapper.CreateMap<HospitalViewModel, Hospital>().ReverseMap();
+            Mapper.CreateMap<SpecialtyViewModel, Speciality>();
+            Mapper.CreateMap<SpecialtyViewModel, Speciality>().ReverseMap();
         }
 
         [HiddenInput(DisplayValue = false)]
@@ -20,13 +20,5 @@
 
         [Required]
         public string Name { get; set; }
-
-        public string Address { get; set; }
-
-        public string Phone { get; set; }
-
-        public decimal Latitude { get; set; }
-
-        public decimal Longitude { get; set; }
     }
 }

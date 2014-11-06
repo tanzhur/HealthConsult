@@ -1,0 +1,36 @@
+﻿@using HealthConsult.Web.Areas.Administration.Models;
+@{
+    ViewBag.Title = "Specialties";
+}
+
+<h2>Specialties</h2>
+
+@(Html.Kendo().Grid<SpecialtyViewModel>()
+    .Name("grid-hospitals")
+    .Columns(columns =>
+    {
+        columns.Bound(model => model.Name);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+    })
+    .DataSource(data =>
+        {
+            data.Ajax()
+                .Model(m => m.Id(h => h.Id))
+                .PageSize(7)
+                .ServerOperation(true)
+                .Read("ReadSpecialties", "Specialties")
+                .Update("UpdateSpecialties", "Specialties")
+                .Destroy("DeleteSpecialties", "Specialties")
+                .Create("CreateSpecialties", "Specialties");
+        }
+    )
+    .Sortable()
+    .Pageable()
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Filterable()
+    .Resizable(resize => resize.Columns(true))
+    .Selectable()
+)
+
+

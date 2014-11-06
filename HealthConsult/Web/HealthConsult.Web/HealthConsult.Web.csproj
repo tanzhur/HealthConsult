@@ -193,7 +193,9 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\HospitalsController.cs" />
     <Compile Include="Areas\Administration\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SpecialtiesController.cs" />
     <Compile Include="Areas\Administration\Models\HospitalViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\SpecialtyViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -230,7 +232,8 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Menu\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Administration\Views\Menu\Hospital.cshtml" />
+    <Content Include="Areas\Administration\Views\Menu\Hospitals.cshtml" />
+    <Content Include="Areas\Administration\Views\Menu\Specialties.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -275,7 +278,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Hospitals\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

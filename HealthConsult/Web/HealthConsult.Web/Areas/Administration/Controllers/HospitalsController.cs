@@ -3,13 +3,13 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using AutoMapper;
     using HealthConsult.Data;
     using HealthConsult.Data.Models;
     using HealthConsult.Web.Areas.Administration.Models;
     using HealthConsult.Web.Controllers;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using AutoMapper;
 
     public class HospitalsController : BaseController
     {
@@ -22,7 +22,6 @@
                                         DataSourceRequest request)
         {
             var result = this.data.Hospitals.All().AsQueryable();
-
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
@@ -32,15 +31,8 @@
         {
             if (hospitalModel != null && this.ModelState.IsValid)
             {
-                var hospital = new Hospital
-                {
-                    Name = hospitalModel.Name,
-                    Address = hospitalModel.Address,
-                    Phone = hospitalModel.Phone,
-                    Latitude = hospitalModel.Latitude,
-                    Longitude = hospitalModel.Longitude
-                };
-
+                var hospital = new Hospital();
+                Mapper.Map(hospitalModel, hospital, typeof(HospitalViewModel), typeof(Hospital));
                 this.data.Hospitals.Add(hospital);
                 this.data.SaveChanges();
             }
@@ -55,26 +47,17 @@
             if (hospitalModel != null && this.ModelState.IsValid)
             {
                 var hospital = this.data.Hospitals.All().FirstOrDefault(h => h.Id == hospitalModel.Id);
-
-                //var hospital = Mapper.Map<Hospital>(hospitalModel);
-
-                hospital.Name = hospitalModel.Name;
-                hospital.Address = hospitalModel.Address;
-                hospital.Phone = hospitalModel.Phone;
-                hospital.Latitude = hospitalModel.Latitude;
-                hospital.Longitude = hospitalModel.Longitude;
-
+                Mapper.Map(hospitalModel, hospital, typeof(HospitalViewModel), typeof(Hospital));
                 this.data.Hospitals.Update(hospital);
-
                 this.data.SaveChanges();
             }
 
-            return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DeleteHospital([DataSourceRequest]
-                                                  DataSourceRequest request, HospitalViewModel hospitalModel)
+                                           DataSourceRequest request, HospitalViewModel hospitalModel)
         {
             if (hospitalModel != null)
             {
@@ -85,7 +68,7 @@
                 this.data.SaveChanges();
             }
 
-            return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
         }
     }
 }
