@@ -9,7 +9,16 @@ namespace HealthConsult.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/Kendo/jquery.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                "~/Scripts/Kendo/kendo.all.min.js", // or kendo.all.min.js if you want to use Kendo UI Web and Kendo UI DataViz
+                "~/Scripts/Kendo/kendo.aspnetmvc.min.js"));
+
+            // The Kendo CSS bundle
+            bundles.Add(new StyleBundle("~/Content/kendo").Include(
+                        "~/Content/Kendo/kendo.common.min.css",
+                        "~/Content/Kendo/kendo.silver.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,11 +34,17 @@ namespace HealthConsult.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.spacelab.min.css",
                       "~/Content/site.css"));
 
-            // Set EnableOptimizations to false for debugging. For more information,
-            // visit http://go.microsoft.com/fwlink/?LinkId=301862
-            BundleTable.EnableOptimizations = true;
+            // Clear all items from the ignore list to allow minified CSS and JavaScript files in debug mode
+            bundles.IgnoreList.Clear();
+
+
+            // Add back the default ignore list rules sans the ones which affect minified files and debug mode
+            bundles.IgnoreList.Ignore("*.intellisense.js");
+            bundles.IgnoreList.Ignore("*-vsdoc.js");
+            bundles.IgnoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
         }
     }
 }

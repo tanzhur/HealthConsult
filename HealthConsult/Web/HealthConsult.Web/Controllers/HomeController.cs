@@ -1,34 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using HealthConsult.Data;
-
-namespace HealthConsult.Web.Controllers
+﻿namespace HealthConsult.Web.Controllers
 {
-    public class HomeController : Controller
-    {
-        private ApplicationDbContext context = new ApplicationDbContext();
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
 
+    public class HomeController : BaseController
+    {
         public ActionResult Index()
         {
-            this.context.BloodExaminations.FirstOrDefault();
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return this.View();
         }
     }
 }

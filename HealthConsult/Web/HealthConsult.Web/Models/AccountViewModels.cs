@@ -5,7 +5,7 @@ namespace HealthConsult.Web.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
     }
 
@@ -37,7 +37,7 @@ namespace HealthConsult.Web.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
@@ -70,7 +70,7 @@ namespace HealthConsult.Web.Models
     public class ResetPasswordViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
@@ -90,7 +90,7 @@ namespace HealthConsult.Web.Models
     public class ForgotPasswordViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
     }
 }

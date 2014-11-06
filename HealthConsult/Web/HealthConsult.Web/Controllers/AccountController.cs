@@ -16,7 +16,7 @@ using HealthConsult.Web.Models;
 namespace HealthConsult.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationUserManager _userManager;
 

@@ -15,3 +15,48 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.logo {
+    height: 100%;
+}
+
+.logo img {
+    margin-top: 30px;
+    height: 70%;
+}
+
+.down {
+    margin-top: 20px;
+}
+
+.administration a.image {
+    margin-top: 20px;
+    display: block;
+    height: 130px;
+    text-indent: -9999px;
+}
+
+.administration a.hospital {
+    background: url(../Images/hospital.png) no-repeat top;
+}
+
+.administration a.specialist {
+    background: url(../Images/specialist.png) no-repeat top;
+}
+
+.administration a.schedule {
+    background: url(../Images/schedule.png) no-repeat top;
+}
+
+.administration a.logs {
+    background: url(../Images/logs.png) no-repeat top;
+}
+
+.administration a.specialties {
+    background: url(../Images/specialties.png) no-repeat top;
+}
+
+.administration a.link {
+    text-decoration: none;
+    color: black;
+}

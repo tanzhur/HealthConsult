@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="well down administration">
+    <h2>Administration</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-3 text-center">
+            @Html.ActionLink("Hospitals", "Hospital", null, new { @class = "hospital image" })
+            @Html.ActionLink("Hospitals", "Hospital", null, new { @class = "link" })
+        </div>
+        <div class="col-md-3 text-center">
+            @Html.ActionLink("Specialists", "Specialists", null, new { @class = "specialist image" })
+            @Html.ActionLink("Specialists", "Specialists", null, new { @class = "link" })
+        </div>
+        <div class="col-md-3 text-center">
+            @Html.ActionLink("Specialties", "Specialties", null, new { @class = "specialties image" })
+            @Html.ActionLink("Specialties", "Specialties", null, new { @class = "link" })
+        </div>
+        <div class="col-md-3 text-center">
+            @Html.ActionLink("Schedules", "Schedules", null, new { @class = "schedule image" })
+            @Html.ActionLink("Schedules", "Schedules", null, new { @class = "link" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 text-center">
+            @Html.ActionLink("Logs", "Logs", null, new { @class = "logs image" })
+            @Html.ActionLink("Logs", "Logs", null, new { @class = "link" })
+        </div>
+    </div>
+</div>
+
+
+
+

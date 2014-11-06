@@ -1,0 +1,38 @@
+﻿@using HealthConsult.Web.Areas.Administration.Models;
+
+@{
+    ViewBag.Title = "Hospitals";
+}
+
+<h2>Hospitals</h2>
+
+@(Html.Kendo().Grid<HospitalViewModel>()
+    .Name("grid-hospitals")
+    .Columns(columns =>
+    {
+        columns.Bound(model => model.Name);
+        columns.Bound(model => model.Phone);
+        columns.Bound(model => model.Address);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+    })
+    .DataSource(data =>
+        {
+            data.Ajax()
+                .Model(m => m.Id(h => h.Id))
+                .PageSize(7)
+                .ServerOperation(true)
+                .Read("ReadHospitals", "Hospitals")
+                .Update("UpdateHospital", "Hospitals")
+                .Destroy("DeleteHospital", "Hospitals")
+                .Create("CreateHospital", "Hospitals");
+        }
+    )
+    .Sortable()
+    .Pageable()
+    .Groupable()
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Filterable()
+    .Resizable(resize => resize.Columns(true))
+    .Selectable()
+)

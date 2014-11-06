@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{923A85F0-5999-4DDE-A14C-3205A860E7DF}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthConsult.Web.Tests", "Tests\HealthConsult.Web.Tests.csproj", "{249C6746-FDD4-4389-BEF9-CBD4E1DEAEE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthConsult.Web", "Web\HealthConsult.Web\HealthConsult.Web.csproj", "{F3642E4D-A950-4924-AC3C-78B444F85065}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A5055825-4C44-4FE3-88D0-ECF4A9CA8FC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthConsult.Common", "HealthConsult.Common\HealthConsult.Common.csproj", "{2097F9CB-5C02-4577-B490-5850E6E00052}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{F3642E4D-A950-4924-AC3C-78B444F85065}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3642E4D-A950-4924-AC3C-78B444F85065}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3642E4D-A950-4924-AC3C-78B444F85065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2097F9CB-5C02-4577-B490-5850E6E00052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2097F9CB-5C02-4577-B490-5850E6E00052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2097F9CB-5C02-4577-B490-5850E6E00052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2097F9CB-5C02-4577-B490-5850E6E00052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +56,6 @@ Global
 		{9FED74A6-D249-47FA-A271-E1148A19E090} = {923A85F0-5999-4DDE-A14C-3205A860E7DF}
 		{249C6746-FDD4-4389-BEF9-CBD4E1DEAEE8} = {A2D74431-A53C-45C0-B957-D7FD3BA7F1F3}
 		{F3642E4D-A950-4924-AC3C-78B444F85065} = {08E515D6-81B7-4990-B112-023F715DD95B}
+		{2097F9CB-5C02-4577-B490-5850E6E00052} = {A5055825-4C44-4FE3-88D0-ECF4A9CA8FC5}
 	EndGlobalSection
 EndGlobal
