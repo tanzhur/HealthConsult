@@ -21,7 +21,7 @@
         public JsonResult ReadSpecialties([DataSourceRequest]
                                           DataSourceRequest request)
         {
-            var result = this.data.Specialities.AllWithDeleted().AsQueryable()
+            var result = this.data.Specialities.All().AsQueryable()
                              .Project()
                              .To<SpecialtyViewModel>();
 

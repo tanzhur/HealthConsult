@@ -1,8 +1,10 @@
 ﻿namespace HealthConsult.Data.Models.Enumerations
 {
+    using System.ComponentModel;
+
     public enum ActionType
     {
-        Login,
-        Logout
+        [Description("Logged into system")]
+        Login
     }
 }

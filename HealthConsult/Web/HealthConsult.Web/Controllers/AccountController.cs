@@ -12,6 +12,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using HealthConsult.Web.Models;
+using HealthConsult.Web.Infrastructure.Logging;
+using HealthConsult.Data.Models.Enumerations;
+using HealthConsult.Data;
 
 namespace HealthConsult.Web.Controllers
 {
@@ -20,13 +23,16 @@ namespace HealthConsult.Web.Controllers
     {
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IApplicationData data, ILogger logger)
         {
+            this.data = data;
+            this.logger = logger;
         }
 
-        public AccountController(ApplicationUserManager userManager)
+        public AccountController(ApplicationUserManager userManager, IApplicationData data)
         {
             UserManager = userManager;
+            this.data = data;
         }
 
         public ApplicationUserManager UserManager {
@@ -62,6 +68,7 @@ namespace HealthConsult.Web.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+                    this.logger.Log(this.data, ActionType.Login, user.Id);
                     return RedirectToLocal(returnUrl);
                 }
                 else

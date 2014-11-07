@@ -190,10 +190,12 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\HospitalsController.cs" />
+    <Compile Include="Areas\Administration\Controllers\LogsController.cs" />
     <Compile Include="Areas\Administration\Controllers\MenuController.cs" />
     <Compile Include="Areas\Administration\Controllers\SpecialistsController.cs" />
     <Compile Include="Areas\Administration\Controllers\SpecialtiesController.cs" />
     <Compile Include="Areas\Administration\Models\HospitalViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\LogViewModel.cs" />
     <Compile Include="Areas\Administration\Models\SpecialistViewModel.cs" />
     <Compile Include="Areas\Administration\Models\SpecialtyViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -202,6 +204,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Logging\ILogger.cs" />
+    <Compile Include="Infrastructure\Logging\Logger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -233,6 +237,7 @@
     <Content Include="Areas\Administration\Views\Menu\Specialties.cshtml" />
     <Content Include="Areas\Administration\Views\Menu\Specialists.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SpecialistTemplate.cshtml" />
+    <Content Include="Areas\Administration\Views\Menu\Logs.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -278,7 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\Mapping\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

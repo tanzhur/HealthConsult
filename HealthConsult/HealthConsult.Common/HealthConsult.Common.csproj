@@ -43,6 +43,12 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\HealthConsult.Data.Models\HealthConsult.Data.Models.csproj">
+      <Project>{9FED74A6-D249-47FA-A271-E1148A19E090}</Project>
+      <Name>HealthConsult.Data.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

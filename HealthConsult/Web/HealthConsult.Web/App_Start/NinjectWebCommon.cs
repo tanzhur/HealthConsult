@@ -11,6 +11,7 @@ namespace HealthConsult.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using HealthConsult.Data;
+    using HealthConsult.Web.Infrastructure.Logging;
 
     public static class NinjectWebCommon 
     {
@@ -63,6 +64,7 @@ namespace HealthConsult.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IApplicationData>().To<ApplicationData>();
+            kernel.Bind<ILogger>().To<Logger>();
         }        
     }
 }

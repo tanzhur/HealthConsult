@@ -62,5 +62,10 @@
 
             return this.View();
         }
+
+        public ActionResult Logs()
+        {
+            return this.View();
+        }
     }
 }

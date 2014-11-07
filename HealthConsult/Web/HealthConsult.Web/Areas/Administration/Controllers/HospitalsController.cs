@@ -8,7 +8,6 @@
     using HealthConsult.Data;
     using HealthConsult.Data.Models;
     using HealthConsult.Web.Areas.Administration.Models;
-    using HealthConsult.Web.Controllers;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
@@ -22,7 +21,7 @@
         public JsonResult ReadHospitals([DataSourceRequest]
                                         DataSourceRequest request)
         {
-            var result = this.data.Hospitals.AllWithDeleted().AsQueryable()
+            var result = this.data.Hospitals.All().AsQueryable()
                 .Project()
                 .To<HospitalViewModel>();
 
