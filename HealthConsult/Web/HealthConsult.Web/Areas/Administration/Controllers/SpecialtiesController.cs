@@ -7,15 +7,18 @@
     using AutoMapper.QueryableExtensions;
     using HealthConsult.Data;
     using HealthConsult.Data.Models;
+    using HealthConsult.Data.Models.Enumerations;
     using HealthConsult.Web.Areas.Administration.Models;
+    using HealthConsult.Web.Infrastructure.Logging;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     public class SpecialtiesController : AdminController
     {
-        public SpecialtiesController(IApplicationData data)
+        public SpecialtiesController(IApplicationData data, ILogger logger)
         {
             this.data = data;
+            this.logger = logger;
         }
 
         public JsonResult ReadSpecialties([DataSourceRequest]
@@ -38,6 +41,8 @@
                 Mapper.Map(specialtyModel, specialty, typeof(SpecialtyViewModel), typeof(Speciality));
                 this.data.Specialities.Add(specialty);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.AddSpecialty, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));
@@ -53,6 +58,8 @@
                 Mapper.Map(specialtyModel, specialty, typeof(SpecialtyViewModel), typeof(Speciality));
                 this.data.Specialities.Update(specialty);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.EditSpecialty, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));
@@ -69,6 +76,8 @@
                 specialty.DeletedOn = DateTime.Now;
                 this.data.Specialities.Update(specialty);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.DeleteSpecialty, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));

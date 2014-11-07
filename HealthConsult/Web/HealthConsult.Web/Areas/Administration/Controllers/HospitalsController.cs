@@ -7,23 +7,26 @@
     using AutoMapper.QueryableExtensions;
     using HealthConsult.Data;
     using HealthConsult.Data.Models;
+    using HealthConsult.Data.Models.Enumerations;
     using HealthConsult.Web.Areas.Administration.Models;
+    using HealthConsult.Web.Infrastructure.Logging;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     public class HospitalsController : AdminController
     {
-        public HospitalsController(IApplicationData data)
+        public HospitalsController(IApplicationData data, ILogger logger)
         {
             this.data = data;
+            this.logger = logger;
         }
 
         public JsonResult ReadHospitals([DataSourceRequest]
                                         DataSourceRequest request)
         {
             var result = this.data.Hospitals.All().AsQueryable()
-                .Project()
-                .To<HospitalViewModel>();
+                             .Project()
+                             .To<HospitalViewModel>();
 
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
@@ -38,6 +41,8 @@
                 Mapper.Map(hospitalModel, hospital, typeof(HospitalViewModel), typeof(Hospital));
                 this.data.Hospitals.Add(hospital);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.AddHospital, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
@@ -53,6 +58,8 @@
                 Mapper.Map(hospitalModel, hospital, typeof(HospitalViewModel), typeof(Hospital));
                 this.data.Hospitals.Update(hospital);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.EditHospital, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
@@ -69,6 +76,8 @@
                 hospital.DeletedOn = DateTime.Now;
                 this.data.Hospitals.Update(hospital);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.DeleteHospital, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));

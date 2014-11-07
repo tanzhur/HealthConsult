@@ -5,6 +5,15 @@
     public enum ActionType
     {
         [Description("Logged into system")]
-        Login
+        Login,
+        AddHospital,
+        EditHospital,
+        DeleteHospital,
+        AddSpecialty,
+        EditSpecialty,
+        DeleteSpecialty,
+        AddSpecialist,
+        EditSpecialist,
+        DeleteSpecialist
     }
 }

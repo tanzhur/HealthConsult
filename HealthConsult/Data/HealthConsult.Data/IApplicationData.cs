@@ -27,6 +27,8 @@
 
         IGenericRepository<Log> Logs { get; }
 
+        IGenericRepository<User> Users { get; }
+
         void SaveChanges();
 
         void Dispose();

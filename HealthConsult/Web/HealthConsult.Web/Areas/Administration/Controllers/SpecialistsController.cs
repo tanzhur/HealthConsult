@@ -9,20 +9,19 @@
     using HealthConsult.Data;
     using HealthConsult.Data.Models;
     using HealthConsult.Web.Areas.Administration.Models;
-    using HealthConsult.Web.Controllers;
+    using HealthConsult.Web.Infrastructure.Logging;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using HealthConsult.Data.Models.Enumerations;
-    using System.Globalization;
-    using System.Threading;
 
     public class SpecialistsController : AdminController
     {
-        public SpecialistsController(IApplicationData data)
+        public SpecialistsController(IApplicationData data, ILogger logger)
         {
             this.data = data;
+            this.logger = logger;
         }
 
         public JsonResult ReadSpecialists([DataSourceRequest]
@@ -56,6 +55,8 @@
                 this.data.Specialists.Add(specialist);
 
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.AddSpecialist, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialistModel }.ToDataSourceResult(request, this.ModelState));
@@ -64,14 +65,16 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateSpecialist([DataSourceRequest]
-                                              DataSourceRequest request, SpecialistViewModel specialistModel)
+                                             DataSourceRequest request, SpecialistViewModel specialistModel)
         {
             if (specialistModel != null && this.ModelState.IsValid)
             {
-                var specialist = this.data.Specialists.All().FirstOrDefault(h => h.Id == specialistModel.Id);
+                var specialist = this.data.Specialists.All().FirstOrDefault(s => s.Id == specialistModel.Id);
                 Mapper.Map(specialistModel, specialist, typeof(SpecialistViewModel), typeof(Specialist));
                 this.data.Specialists.Update(specialist);
                 this.data.SaveChanges();
+
+                this.logger.Log(this.data, ActionType.EditSpecialist, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialistModel }.ToDataSourceResult(request, this.ModelState));
@@ -79,15 +82,22 @@
 
         [HttpPost]
         public ActionResult DeleteSpecialist([DataSourceRequest]
-                                              DataSourceRequest request, SpecialistViewModel specialistModel)
+                                             DataSourceRequest request, SpecialistViewModel specialistModel)
         {
             if (specialistModel != null)
             {
-                var specialist = this.data.Specialists.All().FirstOrDefault(h => h.Id == specialistModel.Id);
+                var specialist = this.data.Specialists.All().FirstOrDefault(s => s.Id == specialistModel.Id);
                 specialist.Deleted = true;
                 specialist.DeletedOn = DateTime.Now;
                 this.data.Specialists.Update(specialist);
+
+                var user = this.data.Users.All().FirstOrDefault(u => u.UserName == this.User.Identity.Name);
+                user.Deleted = true;
+                user.DeletedOn = DateTime.Now;
+                this.data.Users.Update(user);
+
                 this.data.SaveChanges();
+                this.logger.Log(this.data, ActionType.DeleteSpecialist, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialistModel }.ToDataSourceResult(request, this.ModelState));

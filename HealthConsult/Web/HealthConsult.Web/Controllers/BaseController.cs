@@ -20,5 +20,10 @@
             this.data = data;
             this.logger = logger;
         }
+
+        protected string GetUserId(string userName)
+        {
+            return this.data.Users.All().FirstOrDefault(u => u.UserName == userName).Id;
+        }
     }
 }

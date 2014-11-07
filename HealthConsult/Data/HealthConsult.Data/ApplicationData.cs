@@ -111,6 +111,14 @@
             }
         }
 
+        public IGenericRepository<User> Users
+        {
+            get
+            {
+                return this.GetRepository<User>();
+            }
+        }
+
         public void SaveChanges()
         {
             this.context.SaveChanges();
