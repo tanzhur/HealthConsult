@@ -9,13 +9,14 @@
     {
         private IApplicationData data;
 
-        public void Log(IApplicationData data, ActionType action, string userId)
+        public void Log(IApplicationData data, ActionType action, string actionInfo, string userId)
         {
             this.data = data;
             var log = new Log()
             {
                 ActionDate = DateTime.Now,
                 Action = action,
+                ActionInfo = actionInfo,
                 UserId = userId
             };
 

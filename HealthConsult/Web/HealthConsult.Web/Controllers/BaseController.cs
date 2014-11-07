@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using HealthConsult.Data;
+    using HealthConsult.Data.Models.Enumerations;
     using HealthConsult.Web.Infrastructure.Logging;
 
     public class BaseController : Controller

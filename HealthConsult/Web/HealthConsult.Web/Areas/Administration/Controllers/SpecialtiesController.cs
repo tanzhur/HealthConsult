@@ -42,7 +42,7 @@
                 this.data.Specialities.Add(specialty);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.AddSpecialty, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.AddSpecialty, specialtyModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));
@@ -59,7 +59,7 @@
                 this.data.Specialities.Update(specialty);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.EditSpecialty, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.EditSpecialty, specialtyModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));
@@ -77,7 +77,7 @@
                 this.data.Specialities.Update(specialty);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.DeleteSpecialty, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.DeleteSpecialty, specialtyModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));

@@ -42,7 +42,7 @@
                 this.data.Hospitals.Add(hospital);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.AddHospital, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.AddHospital, hospitalModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
@@ -59,7 +59,7 @@
                 this.data.Hospitals.Update(hospital);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.EditHospital, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.EditHospital, hospitalModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
@@ -77,7 +77,7 @@
                 this.data.Hospitals.Update(hospital);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.DeleteHospital, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.DeleteHospital, hospitalModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));

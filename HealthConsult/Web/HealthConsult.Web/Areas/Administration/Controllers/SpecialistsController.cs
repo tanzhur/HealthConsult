@@ -56,7 +56,7 @@
 
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.AddSpecialist, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.AddSpecialist, specialistModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialistModel }.ToDataSourceResult(request, this.ModelState));
@@ -74,7 +74,7 @@
                 this.data.Specialists.Update(specialist);
                 this.data.SaveChanges();
 
-                this.logger.Log(this.data, ActionType.EditSpecialist, this.GetUserId(this.User.Identity.Name));
+                this.logger.Log(this.data, ActionType.EditSpecialist, specialistModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialistModel }.ToDataSourceResult(request, this.ModelState));
@@ -91,13 +91,14 @@
                 specialist.DeletedOn = DateTime.Now;
                 this.data.Specialists.Update(specialist);
 
-                var user = this.data.Users.All().FirstOrDefault(u => u.UserName == this.User.Identity.Name);
+                var user = this.data.Users.All().FirstOrDefault(u => u.UserName == specialistModel.Username);
                 user.Deleted = true;
                 user.DeletedOn = DateTime.Now;
                 this.data.Users.Update(user);
 
                 this.data.SaveChanges();
-                this.logger.Log(this.data, ActionType.DeleteSpecialist, this.GetUserId(this.User.Identity.Name));
+
+                this.logger.Log(this.data, ActionType.DeleteSpecialist, specialistModel.Name, this.GetUserId(this.User.Identity.Name));
             }
 
             return this.Json(new[] { specialistModel }.ToDataSourceResult(request, this.ModelState));

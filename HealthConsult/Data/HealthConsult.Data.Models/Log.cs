@@ -21,6 +21,9 @@
         [Required]
         public ActionType Action { get; set; }
 
+        [Required]
+        public string ActionInfo { get; set; }
+
         public bool Deleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

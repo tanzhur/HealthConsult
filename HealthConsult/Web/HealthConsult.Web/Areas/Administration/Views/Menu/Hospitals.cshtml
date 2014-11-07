@@ -24,7 +24,8 @@
                 .Read("ReadHospitals", "Hospitals")
                 .Update("UpdateHospital", "Hospitals")
                 .Destroy("DeleteHospital", "Hospitals")
-                .Create("CreateHospital", "Hospitals");
+                .Create("CreateHospital", "Hospitals")
+                .Events(events => events.Sync("sync_handler"));
         }
     )
     .Sortable()
@@ -35,3 +36,13 @@
     .Resizable(resize => resize.Columns(true))
     .Selectable()
 )
+
+<script type="text/javascript">
+    function sendAntiForgery() {
+        return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() }
+    }
+
+    function sync_handler(e) {
+        this.read();
+    }
+</script>

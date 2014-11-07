@@ -12,6 +12,7 @@
         columns.Bound(model => model.Date);
         columns.Bound(model => model.Username);
         columns.Bound(model => model.Action);
+        columns.Bound(model => model.ActionInfo);
     })
     .DataSource(data =>
         {
@@ -26,6 +27,7 @@
     .Pageable()
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Filterable()
+    .Groupable()
     .Resizable(resize => resize.Columns(true))
     .Selectable()
 )

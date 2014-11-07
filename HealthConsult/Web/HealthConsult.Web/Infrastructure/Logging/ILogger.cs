@@ -6,6 +6,6 @@
 
     public interface ILogger
     {
-        void Log(IApplicationData data, ActionType action, string userId);
+        void Log(IApplicationData data, ActionType action, string actionInfo, string userId);
     }
 }

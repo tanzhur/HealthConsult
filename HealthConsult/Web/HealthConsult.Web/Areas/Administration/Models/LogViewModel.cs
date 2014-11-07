@@ -15,9 +15,9 @@
         {
             Mapper.CreateMap<LogViewModel, Log>()
                   .ReverseMap()
-                  .ForMember(s => s.Date, opt => opt.MapFrom(u => u.ActionDate.ToString()))
-                  .ForMember(s => s.Action, opt => opt.MapFrom(u => u.Action.ToString()))
-                  .ForMember(s => s.Username, opt => opt.MapFrom(u => u.User.UserName));
+                  .ForMember(s => s.Date, opt => opt.MapFrom(l => l.ActionDate.ToString()))
+                  .ForMember(s => s.Action, opt => opt.MapFrom(l => l.Action.ToString()))
+                  .ForMember(s => s.Username, opt => opt.MapFrom(l => l.User.UserName));
         }
 
         [HiddenInput(DisplayValue = false)]
@@ -28,5 +28,7 @@
         public string Username { get; set; }
 
         public string Action { get; set; }
+
+        public string ActionInfo { get; set; }
     }
 }

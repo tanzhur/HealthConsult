@@ -68,7 +68,7 @@ namespace HealthConsult.Web.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    this.logger.Log(this.data, ActionType.Login, user.Id);
+                    this.logger.Log(this.data, ActionType.Login, user.UserName, user.Id);
                     return RedirectToLocal(returnUrl);
                 }
                 else
