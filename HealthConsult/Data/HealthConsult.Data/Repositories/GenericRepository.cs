@@ -6,7 +6,9 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    using HealthConsult.Contracts;
+
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IDeletableEntity
     {
         private readonly IApplicationDbContext context;
         private readonly IDbSet<T> set;
@@ -18,6 +20,11 @@
         }
 
         public IQueryable<T> All()
+        {
+            return this.set.AsQueryable().Where(s => !s.Deleted);
+        }
+
+        public IQueryable<T> AllWithDeleted()
         {
             return this.set.AsQueryable();
         }
@@ -39,10 +46,32 @@
             entry.State = EntityState.Modified;
         }
 
+        public void Remove(T entity)
+        {
+            var entry = this.context.Entry(entity);
+            if (entry.State != EntityState.Deleted)
+            {
+                entry.State = EntityState.Deleted;
+            }
+            else
+            {
+                this.set.Attach(entity);
+                this.set.Remove(entity);
+            }
+        }
+
         public void Delete(T entity)
         {
-            var entry = this.AttachIfDetached(entity);
-            entry.State = EntityState.Deleted;
+            var entry = this.context.Entry(entity);
+            if (entry.State != EntityState.Deleted)
+            {
+                entry.State = EntityState.Deleted;
+            }
+            else
+            {
+                this.set.Attach(entity);
+                this.set.Remove(entity);
+            }
         }
 
         public void Detach(T entity)

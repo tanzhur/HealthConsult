@@ -5,6 +5,8 @@
 
     public interface IApplicationData
     {
+        IApplicationDbContext Context { get; }
+
         IGenericRepository<BloodExamination> BloodExaminations { get; }
 
         IGenericRepository<Consultation> Consultations { get; }

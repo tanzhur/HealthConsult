@@ -1,6 +1,4 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -59,4 +57,12 @@ textarea {
 .administration a.link {
     text-decoration: none;
     color: black;
+}
+
+.k-edit-form-container .form-control {
+    height: 20px;
+}
+
+.kendo-form {
+    margin-left: 20px;
 }

@@ -4,9 +4,14 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    public interface IGenericRepository<T> where T : class
+    using HealthConsult.Contracts;
+
+
+    public interface IGenericRepository<T> where T : class, IDeletableEntity
     {
         IQueryable<T> All();
+
+        IQueryable<T> AllWithDeleted();
 
         IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions);
 

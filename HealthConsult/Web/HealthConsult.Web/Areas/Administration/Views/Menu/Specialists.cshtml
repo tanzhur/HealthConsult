@@ -1,0 +1,56 @@
+﻿@model SpecialistViewModel
+@using HealthConsult.Web.Areas.Administration.Models;
+
+@{
+    ViewBag.Title = "Specialists";
+}
+
+<h2>Specialists</h2>
+
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<SpecialistViewModel>()
+    .Name("grid-specialists")
+    .Columns(columns =>
+    {
+        columns.Bound(model => model.TitleAndName);
+        columns.Bound(model => model.Phone);
+        columns.Bound(model => model.SpecialityName);
+        columns.Bound(model => model.HospitalName);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+    })
+    .DataSource(data =>
+        {
+            data.Ajax()
+                .Model(m => m.Id(h => h.Id))
+                .PageSize(7)
+                .ServerOperation(true)
+                .Read(read => read.Action("ReadSpecialists", "Specialists").Data("sendAntiForgery"))
+                .Update(up => up.Action("UpdateSpecialist", "Specialists").Data("sendAntiForgery"))
+                .Destroy("DeleteSpecialist", "Specialists")
+                .Create(create => create.Action("CreateSpecialist", "Specialists").Data("sendAntiForgery"))
+                .Events(events => events.Sync("sync_handler"));
+        }
+    )
+    .Sortable()
+    .Pageable()
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(
+            e => e.Mode(GridEditMode.PopUp).TemplateName("SpecialistTemplate").Window(w => w.Title("Add/Edit Specialists").Width(420))
+        )
+    .Filterable()
+    .Groupable()
+    .Resizable(resize => resize.Columns(true))
+    .Selectable()
+)
+
+<script type="text/javascript">
+    function sendAntiForgery() {
+        return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() }
+    }
+
+    function sync_handler(e) {
+        this.read();
+    }
+</script>
+

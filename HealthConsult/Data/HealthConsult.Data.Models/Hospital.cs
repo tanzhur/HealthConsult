@@ -1,9 +1,11 @@
 ﻿namespace HealthConsult.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using HealthConsult.Contracts;
 
-    public class Hospital
+    public class Hospital : DeletableEntity
     {
         private ICollection<Specialist> specialists;
 
@@ -25,6 +27,10 @@
 
         public decimal Longitude { get; set; }
 
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
+
         public virtual ICollection<Specialist> Specialists
         {
             get
@@ -37,5 +43,8 @@
                 this.specialists = value;
             }
         }
+
+
+        
     }
 }

@@ -1,13 +1,12 @@
 ﻿namespace HealthConsult.Web.Areas.Administration.Models
 {
-    using HealthConsult.Data.Models;
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-
-    using HealthConsult.Web.Infrastructure.Mapping;
     using AutoMapper;
+    using HealthConsult.Data.Models;
 
-    public class HospitalViewModel: IMapFrom<Hospital>
+    public class HospitalViewModel
     {
         public HospitalViewModel()
         {
@@ -28,5 +27,9 @@
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

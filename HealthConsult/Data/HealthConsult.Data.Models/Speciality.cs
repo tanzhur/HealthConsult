@@ -1,9 +1,11 @@
 ﻿namespace HealthConsult.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using HealthConsult.Contracts;
 
-    public class Speciality
+    public class Speciality : DeletableEntity
     {
         public Speciality()
         {
@@ -14,6 +16,10 @@
 
         [Required]
         public string Name { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
 
         public virtual ICollection<Specialist> Specialists { get; set; }
     }

@@ -2,25 +2,18 @@ namespace HealthConsult.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Web;
+    using System.Web.Hosting;
+    using HealthConsult.Common;
     using HealthConsult.Data.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using System.Data.OleDb;
-    using System.Data;
-    using System.Web.Hosting;
-    using System.Reflection;
-    using System.IO;
-
 
     internal sealed class Configuration : DbMigrationsConfiguration<HealthConsult.Data.ApplicationDbContext>
     {
-        private const string AdminRole = "Admin";
-        private const string AdminUserName = "Admin";
-        private const string SpecialistRole = "Specialist";
-        private const string InitialPassword = "123456";
-
         public Configuration()
         {
             this.AutomaticMigrationsEnabled = true;
@@ -73,10 +66,10 @@ namespace HealthConsult.Data.Migrations
 
             var store = new UserStore<User>(context);
             var manager = new UserManager<User>(store);
-            var user = new User { UserName = AdminUserName };
+            var user = new User { UserName = GlobalConstants.AdministratorRoleName };
 
-            manager.Create(user, InitialPassword);
-            manager.AddToRole(user.Id, AdminRole);
+            manager.Create(user, GlobalConstants.InitialPassword);
+            manager.AddToRole(user.Id, GlobalConstants.AdministratorRoleName);
 
             context.SaveChanges();
         }
@@ -88,19 +81,21 @@ namespace HealthConsult.Data.Migrations
                 return;
             }
 
-            context.Roles.Add(new IdentityRole { Name = AdminRole });
-            context.Roles.Add(new IdentityRole { Name = SpecialistRole });
+            context.Roles.Add(new IdentityRole { Name = GlobalConstants.AdministratorRoleName });
+            context.Roles.Add(new IdentityRole { Name = GlobalConstants.SpecialistRoleName });
             context.SaveChanges();
         }
 
         private string MapPath(string seedFile)
         {
             if (HttpContext.Current != null)
+            {
                 return HostingEnvironment.MapPath(seedFile);
+            }
 
             var absolutePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath;
             var directoryName = Path.GetDirectoryName(absolutePath);
-            var path = Path.Combine(directoryName, ".." + seedFile.TrimStart('~').Replace('/', '\\'));
+            var path = Path.Combine(directoryName, string.Format("..{0}", seedFile.TrimStart('~').Replace('/', '\\')));
 
             return path;
         }

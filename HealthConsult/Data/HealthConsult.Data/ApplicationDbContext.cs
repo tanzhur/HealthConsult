@@ -6,6 +6,7 @@
     using HealthConsult.Data.Migrations;
     using HealthConsult.Data.Models;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using HealthConsult.Contracts;
 
     public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbContext
     {
@@ -44,9 +45,9 @@
             return base.Set<T>();
         }
 
-        public new void SaveChanges()
+        public override int SaveChanges()
         {
-            base.SaveChanges();
+            return base.SaveChanges();
         }
 
         public new void Dispose()

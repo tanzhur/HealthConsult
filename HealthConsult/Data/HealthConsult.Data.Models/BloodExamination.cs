@@ -2,8 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using HealthConsult.Contracts;
 
-    public class BloodExamination
+    public class BloodExamination : DeletableEntity
     {
         public int Id { get; set; }
 
@@ -40,5 +41,9 @@
         public double MorphologyErythrocytes { get; set; }
 
         public double BloodSugar { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

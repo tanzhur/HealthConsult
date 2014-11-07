@@ -3,8 +3,9 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using HealthConsult.Data.Models.Enumerations;
+    using HealthConsult.Contracts;
 
-    public class VisualExamination
+    public class VisualExamination : DeletableEntity
     {
         public int Id { get; set; }
 
@@ -28,5 +29,9 @@
 
         [Required]
         public string FileType { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

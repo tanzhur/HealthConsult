@@ -1,13 +1,12 @@
 ﻿namespace HealthConsult.Web.Areas.Administration.Models
 {
-    using HealthConsult.Data.Models;
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-
-    using HealthConsult.Web.Infrastructure.Mapping;
     using AutoMapper;
+    using HealthConsult.Data.Models;
 
-    public class SpecialtyViewModel : IMapFrom<Speciality>
+    public class SpecialtyViewModel
     {
         public SpecialtyViewModel()
         {
@@ -20,5 +19,9 @@
 
         [Required]
         public string Name { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

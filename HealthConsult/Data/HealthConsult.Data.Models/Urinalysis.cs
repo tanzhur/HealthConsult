@@ -1,9 +1,10 @@
 ﻿namespace HealthConsult.Data.Models
 {
+    using HealthConsult.Contracts;
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class Urinalysis
+    public class Urinalysis : DeletableEntity
     {
         public int Id { get; set; }
 
@@ -46,5 +47,9 @@
         public string Sediments { get; set; }
 
         public string FormedElements { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

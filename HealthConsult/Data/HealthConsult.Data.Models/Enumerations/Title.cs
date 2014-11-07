@@ -9,6 +9,6 @@
         [Description("Assistant profesor")]
         AssistantProfesor,
         [Description("Associate professor")]
-        AssociateProfessor,      
+        AssociateProfessor
     }
 }

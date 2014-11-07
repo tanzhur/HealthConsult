@@ -1,10 +1,12 @@
 ﻿namespace HealthConsult.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using HealthConsult.Contracts;
     using HealthConsult.Data.Models.Enumerations;
 
-    public class Consultation
+    public class Consultation : DeletableEntity
     {
         public Consultation()
         {
@@ -63,5 +65,9 @@
         public int SpecialityId { get; set; }
 
         public Speciality Speciality { get; set; }
+
+        public bool Deleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }

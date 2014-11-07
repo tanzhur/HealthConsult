@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using HealthConsult.Data;
     using HealthConsult.Data.Models;
     using HealthConsult.Web.Areas.Administration.Models;
@@ -11,7 +12,7 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
-    public class HospitalsController : BaseController
+    public class HospitalsController : AdminController
     {
         public HospitalsController(IApplicationData data)
         {
@@ -21,7 +22,10 @@
         public JsonResult ReadHospitals([DataSourceRequest]
                                         DataSourceRequest request)
         {
-            var result = this.data.Hospitals.All().AsQueryable();
+            var result = this.data.Hospitals.AllWithDeleted().AsQueryable()
+                .Project()
+                .To<HospitalViewModel>();
+
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
@@ -62,9 +66,9 @@
             if (hospitalModel != null)
             {
                 var hospital = this.data.Hospitals.All().FirstOrDefault(h => h.Id == hospitalModel.Id);
-
-                this.data.Hospitals.Delete(hospital);
-
+                hospital.Deleted = true;
+                hospital.DeletedOn = DateTime.Now;
+                this.data.Hospitals.Update(hospital);
                 this.data.SaveChanges();
             }
 

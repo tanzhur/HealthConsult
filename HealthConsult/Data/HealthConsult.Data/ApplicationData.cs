@@ -5,6 +5,7 @@
 
     using HealthConsult.Data.Models;
     using HealthConsult.Data.Repositories;
+    using HealthConsult.Contracts;
 
     public class ApplicationData : IApplicationData
     {
@@ -27,6 +28,14 @@
             get
             {
                 return this.GetRepository<BloodExamination>();
+            }
+        }
+
+        public IApplicationDbContext Context
+        {
+            get
+            {
+                return this.context;
             }
         }
 
@@ -112,7 +121,7 @@
             this.context.Dispose();
         }
 
-        private IGenericRepository<T> GetRepository<T>() where T : class
+        private IGenericRepository<T> GetRepository<T>() where T : class, IDeletableEntity
         {
             var typeOfModel = typeof(T);
             if (!this.repositories.ContainsKey(typeOfModel))

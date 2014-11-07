@@ -178,9 +178,6 @@
     <Reference Include="Microsoft.Owin.Security.Twitter">
       <HintPath>..\..\packages\Microsoft.Owin.Security.Twitter.2.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -191,10 +188,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
     <Compile Include="Areas\Administration\Controllers\HospitalsController.cs" />
     <Compile Include="Areas\Administration\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SpecialistsController.cs" />
     <Compile Include="Areas\Administration\Controllers\SpecialtiesController.cs" />
     <Compile Include="Areas\Administration\Models\HospitalViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\SpecialistViewModel.cs" />
     <Compile Include="Areas\Administration\Models\SpecialtyViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -202,9 +202,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Mapping\AutoMapperConfig.cs" />
-    <Compile Include="Infrastructure\Mapping\IHaveCustomMappings.cs" />
-    <Compile Include="Infrastructure\Mapping\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -234,6 +231,8 @@
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Menu\Hospitals.cshtml" />
     <Content Include="Areas\Administration\Views\Menu\Specialties.cshtml" />
+    <Content Include="Areas\Administration\Views\Menu\Specialists.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SpecialistTemplate.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -278,6 +277,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Infrastructure\Mapping\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +296,10 @@
     <ProjectReference Include="..\..\HealthConsult.Common\HealthConsult.Common.csproj">
       <Project>{2097f9cb-5c02-4577-b490-5850e6e00052}</Project>
       <Name>HealthConsult.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HealthConsult.Contracts\HealthConsult.Contracts.csproj">
+      <Project>{d8e4d09d-9b27-43ed-bb5f-c2955ad828b4}</Project>
+      <Name>HealthConsult.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
