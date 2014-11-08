@@ -67,5 +67,10 @@
         {
             return this.View();
         }
+        
+        public ActionResult Schedules()
+        {
+            return this.View();
+        }
     }
 }

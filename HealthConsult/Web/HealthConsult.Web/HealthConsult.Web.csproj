@@ -45,6 +45,9 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="FluentDateTime">
+      <HintPath>..\..\packages\FluentDateTime.1.11.0\Lib\NET35\FluentDateTime.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>App_Data\Kendo.Mvc.dll</HintPath>
     </Reference>
@@ -197,6 +200,7 @@
     <Compile Include="Areas\Administration\Controllers\SpecialtiesController.cs" />
     <Compile Include="Areas\Administration\Models\HospitalViewModel.cs" />
     <Compile Include="Areas\Administration\Models\LogViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\ScheduleViewModel.cs" />
     <Compile Include="Areas\Administration\Models\SpecialistViewModel.cs" />
     <Compile Include="Areas\Administration\Models\SpecialtyViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -239,7 +243,7 @@
     <Content Include="Areas\Administration\Views\Menu\Specialists.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SpecialistTemplate.cshtml" />
     <Content Include="Areas\Administration\Views\Menu\Logs.cshtml" />
-    <Content Include="Areas\Administration\Views\Menu\Schedule.cshtml" />
+    <Content Include="Areas\Administration\Views\Menu\Schedules.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -284,6 +288,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HospitalTemplate.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SpecialtyTemplate.cshtml" />
+    <Content Include="Views\Shared\_LogoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Schedules\" />

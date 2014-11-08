@@ -14,8 +14,17 @@ textarea {
     max-width: 280px;
 }
 
-.logo {
+.logo, .menu-logo, .login-logo {
+    margin: 0;
     height: 100%;
+}
+
+.menu-logo img {
+    height: 10%;
+}
+
+.login-logo img {
+    height: 50%;
 }
 
 .logo img {

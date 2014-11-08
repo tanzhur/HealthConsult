@@ -1,13 +1,10 @@
 ﻿namespace HealthConsult.Web.Areas.Administration.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper;
     using HealthConsult.Data.Models;
-    using HealthConsult.Common;
-    using HealthConsult.Data.Models.Enumerations;
 
     public class LogViewModel
     {

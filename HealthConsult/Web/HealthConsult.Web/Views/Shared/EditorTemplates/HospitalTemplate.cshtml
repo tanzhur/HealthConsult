@@ -32,14 +32,14 @@
                 <div class="form-group">
                     @Html.Label("Latitude:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-7">
-                        @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", id = "latitude-textbox" } })
+                        @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control"} })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.Label("Longitude:", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-7">
-                        @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", id="longitude-textbox" } })
+                        @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control"} })
                     </div>
                 </div>
 
@@ -58,8 +58,8 @@
     $('#getLocation-btn').bind('click', function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                $("#latitude-textbox").val(position.coords.latitude);
-                $("#longitude-textbox").val(position.coords.longitude);
+                $("#Latitude").val(position.coords.latitude);
+                $("#Longitude").val(position.coords.longitude);
             });
         }
     });

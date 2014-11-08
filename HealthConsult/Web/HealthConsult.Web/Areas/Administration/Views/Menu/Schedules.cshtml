@@ -1,0 +1,57 @@
+﻿@model ScheduleViewModel
+@using FluentDateTime;
+@using HealthConsult.Web.Areas.Administration.Models;
+    
+@{
+    ViewBag.Title = "Schedule";
+}
+
+<h2>Schedule</h2>
+
+@(Html.Kendo().Scheduler<ScheduleViewModel>()
+        .Name("scheduler")
+    .Date(DateTime.Now)
+    .StartTime(DateTime.Now.Previous(DayOfWeek.Monday))
+    .Height(600)
+    .Views(views =>
+    {
+        views.DayView();
+        views.WeekView(workWeekView => workWeekView.Selected(true));
+        views.MonthView();
+        views.AgendaView();
+    })
+    .Timezone("Etc/UTC+3")
+    .Editable(true)
+    .Selectable(true)
+    .Resources(resource =>
+    {
+        resource.Add(m => m.Id)
+            .Title("Owner")
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                new { Text = "Alex", Value = 1, Color = "#f8a398" } ,
+                new { Text = "Bob", Value = 2, Color = "#51a0ed" } ,
+                new { Text = "Charlie", Value = 3, Color = "#56ca85" }
+            });
+    })
+    .DataSource(d => d
+        .Model(m =>
+        {
+            m.Id(f => f.Id);
+            m.Field(f => f.Title).DefaultValue("No title");
+        })
+        .Read("Read", "Scheduler")
+        .Create("Create", "Scheduler")
+        .Destroy("Destroy", "Scheduler")
+        .Update("Update", "Scheduler")
+        .Filter(filters =>
+        {
+            filters.Add(model => model.Id).IsEqualTo(1).Or().IsEqualTo(2);
+        })
+    )
+    
+)
+
+
