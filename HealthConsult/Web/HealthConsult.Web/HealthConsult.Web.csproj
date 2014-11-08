@@ -192,6 +192,7 @@
     <Compile Include="Areas\Administration\Controllers\HospitalsController.cs" />
     <Compile Include="Areas\Administration\Controllers\LogsController.cs" />
     <Compile Include="Areas\Administration\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Administration\Controllers\SchedulesController.cs" />
     <Compile Include="Areas\Administration\Controllers\SpecialistsController.cs" />
     <Compile Include="Areas\Administration\Controllers\SpecialtiesController.cs" />
     <Compile Include="Areas\Administration\Models\HospitalViewModel.cs" />
@@ -238,6 +239,7 @@
     <Content Include="Areas\Administration\Views\Menu\Specialists.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SpecialistTemplate.cshtml" />
     <Content Include="Areas\Administration\Views\Menu\Logs.cshtml" />
+    <Content Include="Areas\Administration\Views\Menu\Schedule.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -281,8 +283,10 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HospitalTemplate.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SpecialtyTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Administration\Views\Schedules\" />
     <Folder Include="Infrastructure\Mapping\" />
   </ItemGroup>
   <ItemGroup>

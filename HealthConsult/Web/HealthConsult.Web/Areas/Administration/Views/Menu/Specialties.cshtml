@@ -1,9 +1,12 @@
-﻿@using HealthConsult.Web.Areas.Administration.Models;
+﻿@model SpecialtyViewModel
+@using HealthConsult.Web.Areas.Administration.Models;
 @{
     ViewBag.Title = "Specialties";
 }
 
 <h2>Specialties</h2>
+
+@Html.AntiForgeryToken()
 
 @(Html.Kendo().Grid<SpecialtyViewModel>()
     .Name("grid-specialties")
@@ -18,17 +21,19 @@
                 .Model(m => m.Id(h => h.Id))
                 .PageSize(7)
                 .ServerOperation(true)
-                .Read("ReadSpecialties", "Specialties")
-                .Update("UpdateSpecialties", "Specialties")
-                .Destroy("DeleteSpecialties", "Specialties")
-                .Create("CreateSpecialties", "Specialties")
+                .Read(read => read.Action("ReadSpecialties", "Specialties").Data("sendAntiForgery"))
+                .Update(update => update.Action("UpdateSpecialties", "Specialties").Data("sendAntiForgery"))
+                .Destroy(del => del.Action("DeleteSpecialties", "Specialties").Data("sendAntiForgery"))
+                .Create(create => create.Action("CreateSpecialties", "Specialties").Data("sendAntiForgery"))
                 .Events(events => events.Sync("sync_handler"));
         }
     )
     .Sortable()
     .Pageable()
     .ToolBar(toolbar => toolbar.Create())
-    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Editable(
+            e => e.Mode(GridEditMode.PopUp).TemplateName("SpecialtyTemplate").Window(w => w.Title("Add/Edit Specialists").Width(420))
+    )
     .Filterable()
     .Resizable(resize => resize.Columns(true))
     .Selectable()

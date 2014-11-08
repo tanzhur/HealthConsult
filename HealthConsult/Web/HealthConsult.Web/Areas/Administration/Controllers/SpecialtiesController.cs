@@ -31,7 +31,8 @@
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateSpecialties([DataSourceRequest]
                                               DataSourceRequest request, SpecialtyViewModel specialtyModel)
         {
@@ -48,7 +49,8 @@
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateSpecialties([DataSourceRequest]
                                               DataSourceRequest request, SpecialtyViewModel specialtyModel)
         {
@@ -65,7 +67,8 @@
             return this.Json(new[] { specialtyModel }.ToDataSourceResult(request, this.ModelState));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteSpecialties([DataSourceRequest]
                                               DataSourceRequest request, SpecialtyViewModel specialtyModel)
         {

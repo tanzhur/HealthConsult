@@ -1,0 +1,19 @@
+﻿@model HealthConsult.Web.Areas.Administration.Models.SpecialtyViewModel
+
+<div class="kendo-form">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>
+
