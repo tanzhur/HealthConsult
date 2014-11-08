@@ -1,0 +1,71 @@
+﻿@model HealthConsult.Web.Areas.Administration.Models.HospitalViewModel
+
+<div class="kendo-form">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Latitude:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(m => m.Latitude, new { htmlAttributes = new { @class = "form-control", id = "latitude-textbox" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Longitude:", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        @Html.EditorFor(m => m.Longitude, new { htmlAttributes = new { @class = "form-control", id="longitude-textbox" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-7">
+                        <input type="button" id="getLocation-btn" class="btn btn-primary" value="Get location"> 
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>
+
+<script>
+    $('#getLocation-btn').bind('click', function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $("#latitude-textbox").val(position.coords.latitude);
+                $("#longitude-textbox").val(position.coords.longitude);
+            });
+        }
+    });
+</script>
+
+
+
+
+

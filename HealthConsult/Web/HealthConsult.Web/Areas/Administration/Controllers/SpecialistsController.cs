@@ -81,6 +81,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteSpecialist([DataSourceRequest]
                                              DataSourceRequest request, SpecialistViewModel specialistModel)
         {

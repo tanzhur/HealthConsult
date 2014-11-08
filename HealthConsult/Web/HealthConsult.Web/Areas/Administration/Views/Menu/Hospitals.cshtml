@@ -1,10 +1,13 @@
-﻿@using HealthConsult.Web.Areas.Administration.Models;
+﻿@model HospitalViewModel
+@using HealthConsult.Web.Areas.Administration.Models;
 
 @{
     ViewBag.Title = "Hospitals";
 }
 
 <h2>Hospitals</h2>
+
+@Html.AntiForgeryToken()
 
 @(Html.Kendo().Grid<HospitalViewModel>()
     .Name("grid-hospitals")
@@ -21,17 +24,19 @@
                 .Model(m => m.Id(h => h.Id))
                 .PageSize(7)
                 .ServerOperation(true)
-                .Read("ReadHospitals", "Hospitals")
-                .Update("UpdateHospital", "Hospitals")
-                .Destroy("DeleteHospital", "Hospitals")
-                .Create("CreateHospital", "Hospitals")
+                .Read(r => r.Action("ReadHospitals", "Hospitals").Data("sendAntiForgery"))
+                .Update(up => up.Action("UpdateHospital", "Hospitals").Data("sendAntiForgery"))
+                .Destroy(del => del.Action("DeleteHospital", "Hospitals").Data("sendAntiForgery"))
+                .Create(create => create.Action("CreateHospital", "Hospitals").Data("sendAntiForgery"))
                 .Events(events => events.Sync("sync_handler"));
         }
     )
     .Sortable()
     .Pageable()
     .ToolBar(toolbar => toolbar.Create())
-    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+        .Editable(
+                e => e.Mode(GridEditMode.PopUp).TemplateName("HospitalTemplate").Window(w => w.Title("Add/Edit Hospitals").Width(420))
+            )
     .Filterable()
     .Resizable(resize => resize.Columns(true))
     .Selectable()

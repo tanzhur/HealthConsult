@@ -27,7 +27,7 @@
                 .ServerOperation(true)
                 .Read(read => read.Action("ReadSpecialists", "Specialists").Data("sendAntiForgery"))
                 .Update(up => up.Action("UpdateSpecialist", "Specialists").Data("sendAntiForgery"))
-                .Destroy("DeleteSpecialist", "Specialists")
+                .Destroy(del => del.Action("DeleteSpecialist", "Specialists").Data("sendAntiForgery"))
                 .Create(create => create.Action("CreateSpecialist", "Specialists").Data("sendAntiForgery"))
                 .Events(events => events.Sync("sync_handler"));
         }

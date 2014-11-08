@@ -31,12 +31,15 @@
             return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateHospital([DataSourceRequest]
                                            DataSourceRequest request, HospitalViewModel hospitalModel)
         {
             if (hospitalModel != null && this.ModelState.IsValid)
             {
+                hospitalModel.Longitude = "0";
+                hospitalModel.Latitude = "0";
                 var hospital = new Hospital();
                 Mapper.Map(hospitalModel, hospital, typeof(HospitalViewModel), typeof(Hospital));
                 this.data.Hospitals.Add(hospital);
@@ -48,12 +51,15 @@
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdateHospital([DataSourceRequest]
                                            DataSourceRequest request, HospitalViewModel hospitalModel)
         {
             if (hospitalModel != null && this.ModelState.IsValid)
             {
+                hospitalModel.Longitude = "0";
+                hospitalModel.Latitude = "0";
                 var hospital = this.data.Hospitals.All().FirstOrDefault(h => h.Id == hospitalModel.Id);
                 Mapper.Map(hospitalModel, hospital, typeof(HospitalViewModel), typeof(Hospital));
                 this.data.Hospitals.Update(hospital);
@@ -65,7 +71,8 @@
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteHospital([DataSourceRequest]
                                            DataSourceRequest request, HospitalViewModel hospitalModel)
         {
@@ -81,6 +88,12 @@
             }
 
             return this.Json(new[] { hospitalModel }.ToDataSourceResult(request, this.ModelState));
+        }
+
+        private void GetLocation()
+        {
+            ViewBag.Latitude = 0;
+            ViewBag.Longitude = 0;
         }
     }
 }
